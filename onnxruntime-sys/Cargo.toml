@@ -2,7 +2,7 @@
 authors = ["Andrey Volkov <andrew.wolf.alex@gmail.com>"]
 edition = "2021"
 name = "onnxruntime-sys"
-version = "0.0.1"
+version = "0.0.2"
 
 description = "Rust bindings for the C API of Microsoft's ONNX Runtime"
 homepage = "https://github.com/infertech/onnxruntime-rs"
