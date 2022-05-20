@@ -1,9 +1,6 @@
 #![allow(non_snake_case)]
 
-#[cfg(not(target_family = "windows"))]
 use std::os::unix::ffi::OsStrExt;
-#[cfg(target_family = "windows")]
-use std::os::windows::ffi::OsStrExt;
 
 use onnxruntime_sys::*;
 
@@ -61,12 +58,6 @@ fn main() {
     //       Reference: https://github.com/onnx/models/tree/master/vision/classification/squeezenet#model
     let model_path = std::ffi::OsString::from("squeezenet1.0-8.onnx");
 
-    #[cfg(target_family = "windows")]
-    let model_path: Vec<u16> = model_path
-        .encode_wide()
-        .chain(std::iter::once(0)) // Make sure we have a null terminated string
-        .collect();
-    #[cfg(not(target_family = "windows"))]
     let model_path: Vec<std::os::raw::c_char> = model_path
         .as_bytes()
         .iter()

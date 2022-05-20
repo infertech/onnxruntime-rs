@@ -13,7 +13,7 @@ use std::{
 /// WARNING: If version is changed, bindings for all platforms will have to be re-generated.
 ///          To do so, run this:
 ///              cargo build --package onnxruntime-sys --features generate-bindings
-const ORT_VERSION: &str = "1.8.1";
+const ORT_VERSION: &str = "1.9.0";
 
 /// Base Url from which to download pre-built releases/
 const ORT_RELEASE_BASE_URL: &str = "https://github.com/microsoft/onnxruntime/releases/download";
@@ -64,16 +64,6 @@ fn main() {
 fn generate_bindings(_include_dir: &Path) {
     println!("Bindings not generated automatically, using committed files instead.");
     println!("Enable with the 'generate-bindings' cargo feature.");
-
-    // NOTE: If bindings could not be be generated for Apple Sillicon M1, please uncomment the following
-    // let os = env::var("CARGO_CFG_TARGET_OS").expect("Unable to get TARGET_OS");
-    // let arch = env::var("CARGO_CFG_TARGET_ARCH").expect("Unable to get TARGET_ARCH");
-    // if os == "macos" && arch == "aarch64" {
-    //     panic!(
-    //         "OnnxRuntime {} bindings for Apple M1 are not available",
-    //         ORT_VERSION
-    //     );
-    // }
 }
 
 #[cfg(feature = "generate-bindings")]
@@ -156,7 +146,6 @@ where
 
 fn extract_archive(filename: &Path, output: &Path) {
     match filename.extension().map(|e| e.to_str()) {
-        Some(Some("zip")) => extract_zip(filename, output),
         Some(Some("tgz")) => extract_tgz(filename, output),
         _ => unimplemented!(),
     }
@@ -168,32 +157,6 @@ fn extract_tgz(filename: &Path, output: &Path) {
     let tar = flate2::read::GzDecoder::new(buf);
     let mut archive = tar::Archive::new(tar);
     archive.unpack(output).unwrap();
-}
-
-fn extract_zip(filename: &Path, outpath: &Path) {
-    let file = fs::File::open(&filename).unwrap();
-    let buf = io::BufReader::new(file);
-    let mut archive = zip::ZipArchive::new(buf).unwrap();
-    for i in 0..archive.len() {
-        let mut file = archive.by_index(i).unwrap();
-        #[allow(deprecated)]
-        let outpath = outpath.join(file.sanitized_name());
-        if !(&*file.name()).ends_with('/') {
-            println!(
-                "File {} extracted to \"{}\" ({} bytes)",
-                i,
-                outpath.as_path().display(),
-                file.size()
-            );
-            if let Some(p) = outpath.parent() {
-                if !p.exists() {
-                    fs::create_dir_all(&p).unwrap();
-                }
-            }
-            let mut outfile = fs::File::create(&outpath).unwrap();
-            io::copy(&mut file, &mut outfile).unwrap();
-        }
-    }
 }
 
 trait OnnxPrebuiltArchive {
@@ -236,17 +199,13 @@ impl OnnxPrebuiltArchive for Architecture {
 #[derive(Debug)]
 #[allow(clippy::enum_variant_names)]
 enum Os {
-    Windows,
     Linux,
-    MacOs,
 }
 
 impl Os {
     fn archive_extension(&self) -> &'static str {
         match self {
-            Os::Windows => "zip",
             Os::Linux => "tgz",
-            Os::MacOs => "tgz",
         }
     }
 }
@@ -256,8 +215,6 @@ impl FromStr for Os {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.to_lowercase().as_str() {
-            "windows" => Ok(Os::Windows),
-            "macos" => Ok(Os::MacOs),
             "linux" => Ok(Os::Linux),
             _ => Err(format!("Unsupported os: {}", s)),
         }
@@ -267,9 +224,7 @@ impl FromStr for Os {
 impl OnnxPrebuiltArchive for Os {
     fn as_onnx_str(&self) -> Cow<str> {
         match self {
-            Os::Windows => Cow::from("win"),
             Os::Linux => Cow::from("linux"),
-            Os::MacOs => Cow::from("osx"),
         }
     }
 }
@@ -310,32 +265,13 @@ struct Triplet {
 impl OnnxPrebuiltArchive for Triplet {
     fn as_onnx_str(&self) -> Cow<str> {
         match (&self.os, &self.arch, &self.accelerator) {
-            // onnxruntime-win-x86-1.8.1.zip
-            // onnxruntime-win-x64-1.8.1.zip
-            // onnxruntime-win-arm-1.8.1.zip
-            // onnxruntime-win-arm64-1.8.1.zip
             // onnxruntime-linux-x64-1.8.1.tgz
-            // onnxruntime-osx-x64-1.8.1.tgz
-            (Os::Windows, Architecture::X86, Accelerator::None)
-            | (Os::Windows, Architecture::X86_64, Accelerator::None)
-            | (Os::Windows, Architecture::Arm, Accelerator::None)
-            | (Os::Windows, Architecture::Arm64, Accelerator::None)
-            | (Os::Linux, Architecture::X86_64, Accelerator::None)
-            | (Os::MacOs, Architecture::X86_64, Accelerator::None) => Cow::from(format!(
+            (Os::Linux, Architecture::X86_64, Accelerator::None) => Cow::from(format!(
                 "{}-{}",
                 self.os.as_onnx_str(),
                 self.arch.as_onnx_str()
             )),
-            // onnxruntime-win-gpu-x64-1.8.1.zip
-            // Note how this one is inverted from the linux one next
-            (Os::Windows, Architecture::X86_64, Accelerator::Gpu) => Cow::from(format!(
-                "{}-{}-{}",
-                self.os.as_onnx_str(),
-                self.accelerator.as_onnx_str(),
-                self.arch.as_onnx_str(),
-            )),
             // onnxruntime-linux-x64-gpu-1.8.1.tgz
-            // Note how this one is inverted from the windows one above
             (Os::Linux, Architecture::X86_64, Accelerator::Gpu) => Cow::from(format!(
                 "{}-{}-{}",
                 self.os.as_onnx_str(),
