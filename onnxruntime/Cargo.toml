@@ -2,10 +2,9 @@
 authors = ["Andrey Volkov <andrew.wolf.alex@gmail.com>"]
 edition = "2021"
 name = "onnxruntime"
-version = "0.0.1"
+version = "0.0.2"
 
 description = "Wrapper around Microsoft's ONNX Runtime"
-documentation = "https://docs.rs/onnxruntime"
 homepage = "https://github.com/infertech/onnxruntime-rs"
 license = "MIT OR Apache-2.0"
 readme = "../README.md"

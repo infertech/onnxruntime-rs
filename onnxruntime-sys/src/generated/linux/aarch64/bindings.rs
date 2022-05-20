@@ -16,10 +16,6 @@ pub const __USE_POSIX199506: u32 = 1;
 pub const __USE_XOPEN2K: u32 = 1;
 pub const __USE_XOPEN2K8: u32 = 1;
 pub const _ATFILE_SOURCE: u32 = 1;
-pub const __WORDSIZE: u32 = 64;
-pub const __WORDSIZE_TIME64_COMPAT32: u32 = 1;
-pub const __SYSCALL_WORDSIZE: u32 = 64;
-pub const __TIMESIZE: u32 = 64;
 pub const __USE_MISC: u32 = 1;
 pub const __USE_ATFILE: u32 = 1;
 pub const __USE_FORTIFY_LEVEL: u32 = 0;
@@ -27,21 +23,20 @@ pub const __GLIBC_USE_DEPRECATED_GETS: u32 = 0;
 pub const __GLIBC_USE_DEPRECATED_SCANF: u32 = 0;
 pub const _STDC_PREDEF_H: u32 = 1;
 pub const __STDC_IEC_559__: u32 = 1;
-pub const __STDC_IEC_60559_BFP__: u32 = 201404;
 pub const __STDC_IEC_559_COMPLEX__: u32 = 1;
-pub const __STDC_IEC_60559_COMPLEX__: u32 = 201404;
 pub const __STDC_ISO_10646__: u32 = 201706;
 pub const __GNU_LIBRARY__: u32 = 6;
 pub const __GLIBC__: u32 = 2;
-pub const __GLIBC_MINOR__: u32 = 35;
+pub const __GLIBC_MINOR__: u32 = 31;
 pub const _SYS_CDEFS_H: u32 = 1;
 pub const __glibc_c99_flexarr_available: u32 = 1;
-pub const __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI: u32 = 0;
+pub const __WORDSIZE: u32 = 64;
+pub const __WORDSIZE_TIME64_COMPAT32: u32 = 0;
+pub const __LONG_DOUBLE_USES_FLOAT128: u32 = 0;
 pub const __HAVE_GENERIC_SELECTION: u32 = 1;
 pub const __GLIBC_USE_LIB_EXT2: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_BFP_EXT: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_BFP_EXT_C2X: u32 = 0;
-pub const __GLIBC_USE_IEC_60559_EXT: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_FUNCS_EXT: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_FUNCS_EXT_C2X: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_TYPES_EXT: u32 = 0;
@@ -55,9 +50,10 @@ pub const WNOWAIT: u32 = 16777216;
 pub const __WNOTHREAD: u32 = 536870912;
 pub const __WALL: u32 = 1073741824;
 pub const __WCLONE: u32 = 2147483648;
+pub const __ENUM_IDTYPE_T: u32 = 1;
 pub const __W_CONTINUED: u32 = 65535;
 pub const __WCOREFLAG: u32 = 128;
-pub const __HAVE_FLOAT128: u32 = 0;
+pub const __HAVE_FLOAT128: u32 = 1;
 pub const __HAVE_DISTINCT_FLOAT128: u32 = 0;
 pub const __HAVE_FLOAT64X: u32 = 1;
 pub const __HAVE_FLOAT64X_LONG_DOUBLE: u32 = 1;
@@ -80,12 +76,12 @@ pub const EXIT_FAILURE: u32 = 1;
 pub const EXIT_SUCCESS: u32 = 0;
 pub const _SYS_TYPES_H: u32 = 1;
 pub const _BITS_TYPES_H: u32 = 1;
+pub const __TIMESIZE: u32 = 64;
 pub const _BITS_TYPESIZES_H: u32 = 1;
 pub const __OFF_T_MATCHES_OFF64_T: u32 = 1;
 pub const __INO_T_MATCHES_INO64_T: u32 = 1;
 pub const __RLIM_T_MATCHES_RLIM64_T: u32 = 1;
 pub const __STATFS_MATCHES_STATFS64: u32 = 1;
-pub const __KERNEL_OLD_TIMEVAL_MATCHES_TIMEVAL64: u32 = 1;
 pub const __FD_SETSIZE: u32 = 1024;
 pub const _BITS_TIME64_H: u32 = 1;
 pub const __clock_t_defined: u32 = 1;
@@ -116,15 +112,15 @@ pub const FD_SETSIZE: u32 = 1024;
 pub const _BITS_PTHREADTYPES_COMMON_H: u32 = 1;
 pub const _THREAD_SHARED_TYPES_H: u32 = 1;
 pub const _BITS_PTHREADTYPES_ARCH_H: u32 = 1;
-pub const __SIZEOF_PTHREAD_MUTEX_T: u32 = 40;
-pub const __SIZEOF_PTHREAD_ATTR_T: u32 = 56;
+pub const __SIZEOF_PTHREAD_ATTR_T: u32 = 64;
+pub const __SIZEOF_PTHREAD_MUTEX_T: u32 = 48;
+pub const __SIZEOF_PTHREAD_MUTEXATTR_T: u32 = 8;
+pub const __SIZEOF_PTHREAD_CONDATTR_T: u32 = 8;
 pub const __SIZEOF_PTHREAD_RWLOCK_T: u32 = 56;
 pub const __SIZEOF_PTHREAD_BARRIER_T: u32 = 32;
-pub const __SIZEOF_PTHREAD_MUTEXATTR_T: u32 = 4;
+pub const __SIZEOF_PTHREAD_BARRIERATTR_T: u32 = 8;
 pub const __SIZEOF_PTHREAD_COND_T: u32 = 48;
-pub const __SIZEOF_PTHREAD_CONDATTR_T: u32 = 4;
 pub const __SIZEOF_PTHREAD_RWLOCKATTR_T: u32 = 8;
-pub const __SIZEOF_PTHREAD_BARRIERATTR_T: u32 = 4;
 pub const _THREAD_MUTEX_INTERNAL_H: u32 = 1;
 pub const __PTHREAD_MUTEX_HAVE_PREV: u32 = 1;
 pub const __have_pthread_attr_t: u32 = 1;
@@ -174,7 +170,15 @@ pub const _BITS_TYPES_LOCALE_T_H: u32 = 1;
 pub const _BITS_TYPES___LOCALE_T_H: u32 = 1;
 pub const _STRINGS_H: u32 = 1;
 pub const ORT_API_VERSION: u32 = 10;
-pub type wchar_t = ::std::os::raw::c_int;
+pub type wchar_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum idtype_t {
+    P_ALL = 0,
+    P_PID = 1,
+    P_PGID = 2,
+}
+pub type _Float128 = u128;
 pub type _Float32 = f32;
 pub type _Float64 = f64;
 pub type _Float32x = f64;
@@ -407,7 +411,7 @@ pub type __gid_t = ::std::os::raw::c_uint;
 pub type __ino_t = ::std::os::raw::c_ulong;
 pub type __ino64_t = ::std::os::raw::c_ulong;
 pub type __mode_t = ::std::os::raw::c_uint;
-pub type __nlink_t = ::std::os::raw::c_ulong;
+pub type __nlink_t = ::std::os::raw::c_uint;
 pub type __off_t = ::std::os::raw::c_long;
 pub type __off64_t = ::std::os::raw::c_long;
 pub type __pid_t = ::std::os::raw::c_int;
@@ -446,12 +450,11 @@ pub type __id_t = ::std::os::raw::c_uint;
 pub type __time_t = ::std::os::raw::c_long;
 pub type __useconds_t = ::std::os::raw::c_uint;
 pub type __suseconds_t = ::std::os::raw::c_long;
-pub type __suseconds64_t = ::std::os::raw::c_long;
 pub type __daddr_t = ::std::os::raw::c_int;
 pub type __key_t = ::std::os::raw::c_int;
 pub type __clockid_t = ::std::os::raw::c_int;
 pub type __timer_t = *mut ::std::os::raw::c_void;
-pub type __blksize_t = ::std::os::raw::c_long;
+pub type __blksize_t = ::std::os::raw::c_int;
 pub type __blkcnt_t = ::std::os::raw::c_long;
 pub type __blkcnt64_t = ::std::os::raw::c_long;
 pub type __fsblkcnt_t = ::std::os::raw::c_ulong;
@@ -661,93 +664,6 @@ pub type blkcnt_t = __blkcnt_t;
 pub type fsblkcnt_t = __fsblkcnt_t;
 pub type fsfilcnt_t = __fsfilcnt_t;
 #[repr(C)]
-#[derive(Copy, Clone)]
-pub union __atomic_wide_counter {
-    pub __value64: ::std::os::raw::c_ulonglong,
-    pub __value32: __atomic_wide_counter__bindgen_ty_1,
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct __atomic_wide_counter__bindgen_ty_1 {
-    pub __low: ::std::os::raw::c_uint,
-    pub __high: ::std::os::raw::c_uint,
-}
-#[test]
-fn bindgen_test_layout___atomic_wide_counter__bindgen_ty_1() {
-    assert_eq!(
-        ::std::mem::size_of::<__atomic_wide_counter__bindgen_ty_1>(),
-        8usize,
-        concat!("Size of: ", stringify!(__atomic_wide_counter__bindgen_ty_1))
-    );
-    assert_eq!(
-        ::std::mem::align_of::<__atomic_wide_counter__bindgen_ty_1>(),
-        4usize,
-        concat!(
-            "Alignment of ",
-            stringify!(__atomic_wide_counter__bindgen_ty_1)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<__atomic_wide_counter__bindgen_ty_1>())).__low as *const _
-                as usize
-        },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__atomic_wide_counter__bindgen_ty_1),
-            "::",
-            stringify!(__low)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<__atomic_wide_counter__bindgen_ty_1>())).__high as *const _
-                as usize
-        },
-        4usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__atomic_wide_counter__bindgen_ty_1),
-            "::",
-            stringify!(__high)
-        )
-    );
-}
-#[test]
-fn bindgen_test_layout___atomic_wide_counter() {
-    assert_eq!(
-        ::std::mem::size_of::<__atomic_wide_counter>(),
-        8usize,
-        concat!("Size of: ", stringify!(__atomic_wide_counter))
-    );
-    assert_eq!(
-        ::std::mem::align_of::<__atomic_wide_counter>(),
-        8usize,
-        concat!("Alignment of ", stringify!(__atomic_wide_counter))
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<__atomic_wide_counter>())).__value64 as *const _ as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__atomic_wide_counter),
-            "::",
-            stringify!(__value64)
-        )
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<__atomic_wide_counter>())).__value32 as *const _ as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__atomic_wide_counter),
-            "::",
-            stringify!(__value32)
-        )
-    );
-}
-#[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct __pthread_internal_list {
     pub __prev: *mut __pthread_internal_list,
@@ -824,8 +740,7 @@ pub struct __pthread_mutex_s {
     pub __owner: ::std::os::raw::c_int,
     pub __nusers: ::std::os::raw::c_uint,
     pub __kind: ::std::os::raw::c_int,
-    pub __spins: ::std::os::raw::c_short,
-    pub __elision: ::std::os::raw::c_short,
+    pub __spins: ::std::os::raw::c_int,
     pub __list: __pthread_list_t,
 }
 #[test]
@@ -901,16 +816,6 @@ fn bindgen_test_layout___pthread_mutex_s() {
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<__pthread_mutex_s>())).__elision as *const _ as usize },
-        22usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__pthread_mutex_s),
-            "::",
-            stringify!(__elision)
-        )
-    );
-    assert_eq!(
         unsafe { &(*(::std::ptr::null::<__pthread_mutex_s>())).__list as *const _ as usize },
         24usize,
         concat!(
@@ -932,8 +837,7 @@ pub struct __pthread_rwlock_arch_t {
     pub __pad4: ::std::os::raw::c_uint,
     pub __cur_writer: ::std::os::raw::c_int,
     pub __shared: ::std::os::raw::c_int,
-    pub __rwelision: ::std::os::raw::c_schar,
-    pub __pad1: [::std::os::raw::c_uchar; 7usize],
+    pub __pad1: ::std::os::raw::c_ulong,
     pub __pad2: ::std::os::raw::c_ulong,
     pub __flags: ::std::os::raw::c_uint,
 }
@@ -1042,20 +946,8 @@ fn bindgen_test_layout___pthread_rwlock_arch_t() {
         )
     );
     assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<__pthread_rwlock_arch_t>())).__rwelision as *const _ as usize
-        },
-        32usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__pthread_rwlock_arch_t),
-            "::",
-            stringify!(__rwelision)
-        )
-    );
-    assert_eq!(
         unsafe { &(*(::std::ptr::null::<__pthread_rwlock_arch_t>())).__pad1 as *const _ as usize },
-        33usize,
+        32usize,
         concat!(
             "Offset of field: ",
             stringify!(__pthread_rwlock_arch_t),
@@ -1087,13 +979,203 @@ fn bindgen_test_layout___pthread_rwlock_arch_t() {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct __pthread_cond_s {
-    pub __wseq: __atomic_wide_counter,
-    pub __g1_start: __atomic_wide_counter,
+    pub __bindgen_anon_1: __pthread_cond_s__bindgen_ty_1,
+    pub __bindgen_anon_2: __pthread_cond_s__bindgen_ty_2,
     pub __g_refs: [::std::os::raw::c_uint; 2usize],
     pub __g_size: [::std::os::raw::c_uint; 2usize],
     pub __g1_orig_size: ::std::os::raw::c_uint,
     pub __wrefs: ::std::os::raw::c_uint,
     pub __g_signals: [::std::os::raw::c_uint; 2usize],
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union __pthread_cond_s__bindgen_ty_1 {
+    pub __wseq: ::std::os::raw::c_ulonglong,
+    pub __wseq32: __pthread_cond_s__bindgen_ty_1__bindgen_ty_1,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct __pthread_cond_s__bindgen_ty_1__bindgen_ty_1 {
+    pub __low: ::std::os::raw::c_uint,
+    pub __high: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s__bindgen_ty_1__bindgen_ty_1() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s__bindgen_ty_1__bindgen_ty_1>(),
+        8usize,
+        concat!(
+            "Size of: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s__bindgen_ty_1__bindgen_ty_1>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(__pthread_cond_s__bindgen_ty_1__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_1__bindgen_ty_1>())).__low
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1__bindgen_ty_1),
+            "::",
+            stringify!(__low)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_1__bindgen_ty_1>())).__high
+                as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1__bindgen_ty_1),
+            "::",
+            stringify!(__high)
+        )
+    );
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s__bindgen_ty_1() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s__bindgen_ty_1>(),
+        8usize,
+        concat!("Size of: ", stringify!(__pthread_cond_s__bindgen_ty_1))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s__bindgen_ty_1>(),
+        8usize,
+        concat!("Alignment of ", stringify!(__pthread_cond_s__bindgen_ty_1))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_1>())).__wseq as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1),
+            "::",
+            stringify!(__wseq)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_1>())).__wseq32 as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1),
+            "::",
+            stringify!(__wseq32)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union __pthread_cond_s__bindgen_ty_2 {
+    pub __g1_start: ::std::os::raw::c_ulonglong,
+    pub __g1_start32: __pthread_cond_s__bindgen_ty_2__bindgen_ty_1,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct __pthread_cond_s__bindgen_ty_2__bindgen_ty_1 {
+    pub __low: ::std::os::raw::c_uint,
+    pub __high: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s__bindgen_ty_2__bindgen_ty_1() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s__bindgen_ty_2__bindgen_ty_1>(),
+        8usize,
+        concat!(
+            "Size of: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s__bindgen_ty_2__bindgen_ty_1>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(__pthread_cond_s__bindgen_ty_2__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_2__bindgen_ty_1>())).__low
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2__bindgen_ty_1),
+            "::",
+            stringify!(__low)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_2__bindgen_ty_1>())).__high
+                as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2__bindgen_ty_1),
+            "::",
+            stringify!(__high)
+        )
+    );
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s__bindgen_ty_2() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s__bindgen_ty_2>(),
+        8usize,
+        concat!("Size of: ", stringify!(__pthread_cond_s__bindgen_ty_2))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s__bindgen_ty_2>(),
+        8usize,
+        concat!("Alignment of ", stringify!(__pthread_cond_s__bindgen_ty_2))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_2>())).__g1_start as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2),
+            "::",
+            stringify!(__g1_start)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_2>())).__g1_start32 as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2),
+            "::",
+            stringify!(__g1_start32)
+        )
+    );
 }
 #[test]
 fn bindgen_test_layout___pthread_cond_s() {
@@ -1106,26 +1188,6 @@ fn bindgen_test_layout___pthread_cond_s() {
         ::std::mem::align_of::<__pthread_cond_s>(),
         8usize,
         concat!("Alignment of ", stringify!(__pthread_cond_s))
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<__pthread_cond_s>())).__wseq as *const _ as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__pthread_cond_s),
-            "::",
-            stringify!(__wseq)
-        )
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<__pthread_cond_s>())).__g1_start as *const _ as usize },
-        8usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__pthread_cond_s),
-            "::",
-            stringify!(__g1_start)
-        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__pthread_cond_s>())).__g_refs as *const _ as usize },
@@ -1178,48 +1240,18 @@ fn bindgen_test_layout___pthread_cond_s() {
         )
     );
 }
-pub type __tss_t = ::std::os::raw::c_uint;
-pub type __thrd_t = ::std::os::raw::c_ulong;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct __once_flag {
-    pub __data: ::std::os::raw::c_int,
-}
-#[test]
-fn bindgen_test_layout___once_flag() {
-    assert_eq!(
-        ::std::mem::size_of::<__once_flag>(),
-        4usize,
-        concat!("Size of: ", stringify!(__once_flag))
-    );
-    assert_eq!(
-        ::std::mem::align_of::<__once_flag>(),
-        4usize,
-        concat!("Alignment of ", stringify!(__once_flag))
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<__once_flag>())).__data as *const _ as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(__once_flag),
-            "::",
-            stringify!(__data)
-        )
-    );
-}
 pub type pthread_t = ::std::os::raw::c_ulong;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union pthread_mutexattr_t {
-    pub __size: [::std::os::raw::c_char; 4usize],
+    pub __size: [::std::os::raw::c_char; 8usize],
     pub __align: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_pthread_mutexattr_t() {
     assert_eq!(
         ::std::mem::size_of::<pthread_mutexattr_t>(),
-        4usize,
+        8usize,
         concat!("Size of: ", stringify!(pthread_mutexattr_t))
     );
     assert_eq!(
@@ -1251,14 +1283,14 @@ fn bindgen_test_layout_pthread_mutexattr_t() {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union pthread_condattr_t {
-    pub __size: [::std::os::raw::c_char; 4usize],
+    pub __size: [::std::os::raw::c_char; 8usize],
     pub __align: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_pthread_condattr_t() {
     assert_eq!(
         ::std::mem::size_of::<pthread_condattr_t>(),
-        4usize,
+        8usize,
         concat!("Size of: ", stringify!(pthread_condattr_t))
     );
     assert_eq!(
@@ -1292,14 +1324,14 @@ pub type pthread_once_t = ::std::os::raw::c_int;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union pthread_attr_t {
-    pub __size: [::std::os::raw::c_char; 56usize],
+    pub __size: [::std::os::raw::c_char; 64usize],
     pub __align: ::std::os::raw::c_long,
 }
 #[test]
 fn bindgen_test_layout_pthread_attr_t() {
     assert_eq!(
         ::std::mem::size_of::<pthread_attr_t>(),
-        56usize,
+        64usize,
         concat!("Size of: ", stringify!(pthread_attr_t))
     );
     assert_eq!(
@@ -1332,14 +1364,14 @@ fn bindgen_test_layout_pthread_attr_t() {
 #[derive(Copy, Clone)]
 pub union pthread_mutex_t {
     pub __data: __pthread_mutex_s,
-    pub __size: [::std::os::raw::c_char; 40usize],
+    pub __size: [::std::os::raw::c_char; 48usize],
     pub __align: ::std::os::raw::c_long,
 }
 #[test]
 fn bindgen_test_layout_pthread_mutex_t() {
     assert_eq!(
         ::std::mem::size_of::<pthread_mutex_t>(),
-        40usize,
+        48usize,
         concat!("Size of: ", stringify!(pthread_mutex_t))
     );
     assert_eq!(
@@ -1560,14 +1592,14 @@ fn bindgen_test_layout_pthread_barrier_t() {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union pthread_barrierattr_t {
-    pub __size: [::std::os::raw::c_char; 4usize],
+    pub __size: [::std::os::raw::c_char; 8usize],
     pub __align: ::std::os::raw::c_int,
 }
 #[test]
 fn bindgen_test_layout_pthread_barrierattr_t() {
     assert_eq!(
         ::std::mem::size_of::<pthread_barrierattr_t>(),
-        4usize,
+        8usize,
         concat!("Size of: ", stringify!(pthread_barrierattr_t))
     );
     assert_eq!(
@@ -1907,14 +1939,14 @@ extern "C" {
     ) -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    pub fn free(__ptr: *mut ::std::os::raw::c_void);
-}
-extern "C" {
     pub fn reallocarray(
         __ptr: *mut ::std::os::raw::c_void,
         __nmemb: usize,
         __size: usize,
     ) -> *mut ::std::os::raw::c_void;
+}
+extern "C" {
+    pub fn free(__ptr: *mut ::std::os::raw::c_void);
 }
 extern "C" {
     pub fn alloca(__size: ::std::os::raw::c_ulong) -> *mut ::std::os::raw::c_void;
@@ -1930,10 +1962,7 @@ extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn aligned_alloc(
-        __alignment: ::std::os::raw::c_ulong,
-        __size: ::std::os::raw::c_ulong,
-    ) -> *mut ::std::os::raw::c_void;
+    pub fn aligned_alloc(__alignment: usize, __size: usize) -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
     pub fn abort();
@@ -2224,13 +2253,6 @@ extern "C" {
         __s1: *const ::std::os::raw::c_void,
         __s2: *const ::std::os::raw::c_void,
         __n: ::std::os::raw::c_ulong,
-    ) -> ::std::os::raw::c_int;
-}
-extern "C" {
-    pub fn __memcmpeq(
-        __s1: *const ::std::os::raw::c_void,
-        __s2: *const ::std::os::raw::c_void,
-        __n: usize,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
