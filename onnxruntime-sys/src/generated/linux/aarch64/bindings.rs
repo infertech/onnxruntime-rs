@@ -169,7 +169,7 @@ pub const _STRING_H: u32 = 1;
 pub const _BITS_TYPES_LOCALE_T_H: u32 = 1;
 pub const _BITS_TYPES___LOCALE_T_H: u32 = 1;
 pub const _STRINGS_H: u32 = 1;
-pub const ORT_API_VERSION: u32 = 10;
+pub const ORT_API_VERSION: u32 = 11;
 pub type wchar_t = ::std::os::raw::c_uint;
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
@@ -2773,6 +2773,11 @@ pub struct OrtPrepackedWeightsContainer {
 pub struct OrtTensorRTProviderOptionsV2 {
     _unused: [u8; 0],
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct OrtCUDAProviderOptionsV2 {
+    _unused: [u8; 0],
+}
 pub type OrtStatusPtr = *mut OrtStatus;
 #[doc = " \\brief Memory allocation interface"]
 #[doc = ""]
@@ -3505,6 +3510,67 @@ fn bindgen_test_layout_OrtTensorRTProviderOptions() {
             stringify!(OrtTensorRTProviderOptions),
             "::",
             stringify!(trt_force_sequential_engine_build)
+        )
+    );
+}
+#[doc = " \\brief MIGraphX Provider Options"]
+#[doc = ""]
+#[doc = " \\see OrtApi::SessionOptionsAppendExecutionProvider_MIGraphX"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct OrtMIGraphXProviderOptions {
+    pub device_id: ::std::os::raw::c_int,
+    pub migraphx_fp16_enable: ::std::os::raw::c_int,
+    pub migraphx_int8_enable: ::std::os::raw::c_int,
+}
+#[test]
+fn bindgen_test_layout_OrtMIGraphXProviderOptions() {
+    assert_eq!(
+        ::std::mem::size_of::<OrtMIGraphXProviderOptions>(),
+        12usize,
+        concat!("Size of: ", stringify!(OrtMIGraphXProviderOptions))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<OrtMIGraphXProviderOptions>(),
+        4usize,
+        concat!("Alignment of ", stringify!(OrtMIGraphXProviderOptions))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtMIGraphXProviderOptions>())).device_id as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtMIGraphXProviderOptions),
+            "::",
+            stringify!(device_id)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtMIGraphXProviderOptions>())).migraphx_fp16_enable as *const _
+                as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtMIGraphXProviderOptions),
+            "::",
+            stringify!(migraphx_fp16_enable)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtMIGraphXProviderOptions>())).migraphx_int8_enable as *const _
+                as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtMIGraphXProviderOptions),
+            "::",
+            stringify!(migraphx_int8_enable)
         )
     );
 }
@@ -4914,12 +4980,49 @@ pub struct OrtApi {
         ::std::option::Option<unsafe extern "C" fn(binding_ptr: *mut OrtIoBinding) -> OrtStatusPtr>,
     pub SynchronizeBoundOutputs:
         ::std::option::Option<unsafe extern "C" fn(binding_ptr: *mut OrtIoBinding) -> OrtStatusPtr>,
+    pub SessionOptionsAppendExecutionProvider_CUDA_V2: ::std::option::Option<
+        unsafe extern "C" fn(
+            options: *mut OrtSessionOptions,
+            cuda_options: *const OrtCUDAProviderOptionsV2,
+        ) -> OrtStatusPtr,
+    >,
+    pub CreateCUDAProviderOptions: ::std::option::Option<
+        unsafe extern "C" fn(out: *mut *mut OrtCUDAProviderOptionsV2) -> OrtStatusPtr,
+    >,
+    pub UpdateCUDAProviderOptions: ::std::option::Option<
+        unsafe extern "C" fn(
+            cuda_options: *mut OrtCUDAProviderOptionsV2,
+            provider_options_keys: *const *const ::std::os::raw::c_char,
+            provider_options_values: *const *const ::std::os::raw::c_char,
+            num_keys: usize,
+        ) -> OrtStatusPtr,
+    >,
+    pub GetCUDAProviderOptionsAsString: ::std::option::Option<
+        unsafe extern "C" fn(
+            cuda_options: *const OrtCUDAProviderOptionsV2,
+            allocator: *mut OrtAllocator,
+            ptr: *mut *mut ::std::os::raw::c_char,
+        ) -> OrtStatusPtr,
+    >,
+    #[doc = " \\brief Release an ::OrtCUDAProviderOptionsV2"]
+    #[doc = ""]
+    #[doc = " \\note This is an exception in the naming convention of other Release* functions, as the name of the method does not have the V2 suffix, but the type does"]
+    #[doc = ""]
+    #[doc = " \\since Version 1.11."]
+    pub ReleaseCUDAProviderOptions:
+        ::std::option::Option<unsafe extern "C" fn(input: *mut OrtCUDAProviderOptionsV2)>,
+    pub SessionOptionsAppendExecutionProvider_MIGraphX: ::std::option::Option<
+        unsafe extern "C" fn(
+            options: *mut OrtSessionOptions,
+            migraphx_options: *const OrtMIGraphXProviderOptions,
+        ) -> OrtStatusPtr,
+    >,
 }
 #[test]
 fn bindgen_test_layout_OrtApi() {
     assert_eq!(
         ::std::mem::size_of::<OrtApi>(),
-        1632usize,
+        1680usize,
         concat!("Size of: ", stringify!(OrtApi))
     );
     assert_eq!(
@@ -7128,6 +7231,80 @@ fn bindgen_test_layout_OrtApi() {
             stringify!(SynchronizeBoundOutputs)
         )
     );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtApi>())).SessionOptionsAppendExecutionProvider_CUDA_V2
+                as *const _ as usize
+        },
+        1632usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtApi),
+            "::",
+            stringify!(SessionOptionsAppendExecutionProvider_CUDA_V2)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtApi>())).CreateCUDAProviderOptions as *const _ as usize
+        },
+        1640usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtApi),
+            "::",
+            stringify!(CreateCUDAProviderOptions)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtApi>())).UpdateCUDAProviderOptions as *const _ as usize
+        },
+        1648usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtApi),
+            "::",
+            stringify!(UpdateCUDAProviderOptions)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtApi>())).GetCUDAProviderOptionsAsString as *const _ as usize
+        },
+        1656usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtApi),
+            "::",
+            stringify!(GetCUDAProviderOptionsAsString)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtApi>())).ReleaseCUDAProviderOptions as *const _ as usize
+        },
+        1664usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtApi),
+            "::",
+            stringify!(ReleaseCUDAProviderOptions)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<OrtApi>())).SessionOptionsAppendExecutionProvider_MIGraphX
+                as *const _ as usize
+        },
+        1672usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OrtApi),
+            "::",
+            stringify!(SessionOptionsAppendExecutionProvider_MIGraphX)
+        )
+    );
 }
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
@@ -7324,6 +7501,12 @@ fn bindgen_test_layout_OrtCustomOp() {
 }
 extern "C" {
     pub fn OrtSessionOptionsAppendExecutionProvider_CUDA(
+        options: *mut OrtSessionOptions,
+        device_id: ::std::os::raw::c_int,
+    ) -> OrtStatusPtr;
+}
+extern "C" {
+    pub fn OrtSessionOptionsAppendExecutionProvider_MIGraphX(
         options: *mut OrtSessionOptions,
         device_id: ::std::os::raw::c_int,
     ) -> OrtStatusPtr;

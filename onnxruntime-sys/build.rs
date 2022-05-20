@@ -13,7 +13,7 @@ use std::{
 /// WARNING: If version is changed, bindings for all platforms will have to be re-generated.
 ///          To do so, run this:
 ///              cargo build --package onnxruntime-sys --features generate-bindings
-const ORT_VERSION: &str = "1.10.0";
+const ORT_VERSION: &str = "1.11.1";
 
 /// Base Url from which to download pre-built releases/
 const ORT_RELEASE_BASE_URL: &str = "https://github.com/microsoft/onnxruntime/releases/download";
@@ -265,19 +265,19 @@ struct Triplet {
 impl OnnxPrebuiltArchive for Triplet {
     fn as_onnx_str(&self) -> Cow<str> {
         match (&self.os, &self.arch, &self.accelerator) {
-            // onnxruntime-linux-x64-1.10.0.tgz
+            // onnxruntime-linux-x64-1.11.1.tgz
             (Os::Linux, Architecture::X86_64, Accelerator::None) => Cow::from(format!(
                 "{}-{}",
                 self.os.as_onnx_str(),
                 self.arch.as_onnx_str()
             )),
-            // onnxruntime-linux-aarch64-1.10.0.tgz
+            // onnxruntime-linux-aarch64-1.11.1.tgz
             (Os::Linux, Architecture::Arm64, Accelerator::None) => Cow::from(format!(
                 "{}-{}",
                 self.os.as_onnx_str(),
                 self.arch.as_onnx_str()
             )),
-            // onnxruntime-linux-x64-gpu-1.10.0.tgz
+            // onnxruntime-linux-x64-gpu-1.11.1.tgz
             (Os::Linux, Architecture::X86_64, Accelerator::Gpu) => Cow::from(format!(
                 "{}-{}-{}",
                 self.os.as_onnx_str(),
