@@ -1,38 +1,29 @@
 [package]
-authors = ["Nicolas Bigaouette <nbigaouette@elementai.com>"]
-edition = "2018"
+authors = ["Andrey Volkov <andrew.wolf.alex@gmail.com>"]
+edition = "2021"
 name = "onnxruntime-sys"
-version = "0.0.14"
+version = "0.0.1"
 
-description = "Unsafe wrapper around Microsoft's ONNX Runtime"
-documentation = "https://docs.rs/onnxruntime-sys"
-homepage = "https://github.com/nbigaouette/onnxruntime-rs"
+description = "Rust bindings for the C API of Microsoft's ONNX Runtime"
+homepage = "https://github.com/infertech/onnxruntime-rs"
 license = "MIT OR Apache-2.0"
 readme = "../README.md"
-repository = "https://github.com/nbigaouette/onnxruntime-rs"
-
-categories = ["science"]
-keywords = ["neuralnetworks", "onnx", "bindings"]
+repository = "https://github.com/infertech/onnxruntime-rs"
 
 [dependencies]
 
 [build-dependencies]
 bindgen = { version = "0.59", optional = true }
 ureq = "2.1"
-
-# Used on Windows
-zip = "0.5"
-
-# Used on unix
 flate2 = "1.0"
 tar = "0.4"
 
 [features]
 default = []
 
-# Disable build script, used to prevent issues with docs.rs
+# A feature for disabling the build script to prevent issues with `docs.rs`.
 disable-sys-build-script = []
-# Use bindgen to generate bindings in build.rs
+# A feature for generating bindings.
 generate-bindings = ["bindgen"]
 
 [package.metadata.docs.rs]
