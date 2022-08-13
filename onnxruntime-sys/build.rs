@@ -190,6 +190,7 @@ impl OnnxPrebuiltArchive for Architecture {
         match self {
             Architecture::X86 => Cow::from("x86"),
             Architecture::X86_64 => Cow::from("x64"),
+            Architecture::Arm => Cow::from("arm"),
             Architecture::Arm64 => Cow::from("aarch64"),
             _ => panic!("ONNX Runtime pre-built archieve is not available for arm"),
         }
