@@ -2,7 +2,7 @@
 authors = ["Andrey Volkov <andrew.wolf.alex@gmail.com>"]
 edition = "2021"
 name = "onnxruntime"
-version = "0.0.8"
+version = "0.0.9"
 
 description = "Wrapper around Microsoft's ONNX Runtime"
 homepage = "https://github.com/infertech/onnxruntime-rs"
