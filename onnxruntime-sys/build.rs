@@ -100,7 +100,7 @@ fn generate_bindings(include_dir: &Path) {
         .size_t_is_usize(true)
         // Format using rustfmt
         .rustfmt_bindings(true)
-        .rustified_enum("*")
+        .rustified_enum(".*")
         // Finish the builder and generate the bindings.
         .generate()
         // Unwrap the Result and panic on failure.
@@ -265,19 +265,19 @@ struct Triplet {
 impl OnnxPrebuiltArchive for Triplet {
     fn as_onnx_str(&self) -> Cow<str> {
         match (&self.os, &self.arch, &self.accelerator) {
-            // onnxruntime-linux-x64-1.11.1.tgz
+            // onnxruntime-linux-x64-{ORT_VERSION}.tgz
             (Os::Linux, Architecture::X86_64, Accelerator::None) => Cow::from(format!(
                 "{}-{}",
                 self.os.as_onnx_str(),
                 self.arch.as_onnx_str()
             )),
-            // onnxruntime-linux-aarch64-1.11.1.tgz
+            // onnxruntime-linux-aarch64-{ORT_VERSION}.tgz
             (Os::Linux, Architecture::Arm64, Accelerator::None) => Cow::from(format!(
                 "{}-{}",
                 self.os.as_onnx_str(),
                 self.arch.as_onnx_str()
             )),
-            // onnxruntime-linux-x64-gpu-1.11.1.tgz
+            // onnxruntime-linux-x64-gpu-{ORT_VERSION}.tgz
             (Os::Linux, Architecture::X86_64, Accelerator::Gpu) => Cow::from(format!(
                 "{}-{}-{}",
                 self.os.as_onnx_str(),
